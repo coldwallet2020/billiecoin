@@ -1,4 +1,4 @@
-![alt text](https://billiecoin.green/ann/ann.jpg)
+![Billicoin Logo](https://billiecoin.green/img/core-img/logo.png)
 =========================
 
 http://www.billiecoin.green
@@ -19,7 +19,7 @@ which leverage the bitcoin protocol and blockchain technology.
 - SHA256 Proof of Work
 - Mineable either exclusively or via merge-mining any SHA256 PoW coin
 - Billiecoin data service fees burned
-- Masternode collateral requirement: 100000 Billiecoins
+- Masternode collateral requirement: 25,000 Billiecoins
 - Masternode seniority: 3 percent every 4 months until 27 percent over 3 years
 - Governance proposals payout schedule: every month
 - Governance funding per round (183960 Billiecoins per month)
@@ -56,7 +56,7 @@ sudo add-apt-repository ppa:bitcoin/bitcoin
 sudo apt-get update
 sudo apt-get install libdb4.8-dev libdb4.8++-dev -y
 
-git clone https://github.com/billiecoin/billiecoin.git
+git clone https://github.com/coldwallet2020/billiecoin.git
 
 cd billiecoin
 find . -name "*.sh" -exec sudo chmod 755 {} \;
