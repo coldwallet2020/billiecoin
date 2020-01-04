@@ -1,0 +1,6 @@
+usr/local/bin/billiecoin-qt usr/bin
+share/pixmaps/billiecoin32.xpm usr/share/pixmaps
+share/pixmaps/billiecoin16.xpm usr/share/pixmaps
+share/pixmaps/billiecoin128.png usr/share/pixmaps
+debian/billiecoin-qt.desktop usr/share/applications
+debian/billiecoin-qt.protocol usr/share/kde4/services/

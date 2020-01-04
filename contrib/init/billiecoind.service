@@ -1,0 +1,22 @@
+[Unit]
+Description=Billiecoin's distributed currency daemon
+After=network.target
+
+[Service]
+User=billiecoincore
+Group=billiecoincore
+
+Type=forking
+PIDFile=/var/lib/billiecoind/billiecoind.pid
+ExecStart=/usr/bin/billiecoind -daemon -pid=/var/lib/billiecoind/billiecoind.pid \
+-conf=/etc/billiecoincore/billiecoin.conf -datadir=/var/lib/billiecoind -disablewallet
+
+Restart=always
+PrivateTmp=true
+TimeoutStopSec=60s
+TimeoutStartSec=2s
+StartLimitInterval=120s
+StartLimitBurst=5
+
+[Install]
+WantedBy=multi-user.target

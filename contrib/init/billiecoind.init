@@ -1,0 +1,67 @@
+#!/bin/bash
+#
+#  billiecoind The Billiecoin Core server.
+#
+#
+# chkconfig: 345 80 20
+# description: billiecoind
+# processname: billiecoind
+#
+
+# Source function library.
+. /etc/init.d/functions
+
+# you can override defaults in /etc/sysconfig/billiecoind, see below
+if [ -f /etc/sysconfig/billiecoind ]; then
+        . /etc/sysconfig/billiecoind
+fi
+
+RETVAL=0
+
+prog=billiecoind
+# you can override the lockfile via BILLIECOIND_LOCKFILE in /etc/sysconfig/billiecoind
+lockfile=${BILLIECOIND_LOCKFILE-/var/lock/subsys/billiecoind}
+
+# billiecoind defaults to /usr/bin/billiecoind, override with BILLIECOIND_BIN
+billiecoind=${BILLIECOIND_BIN-/usr/bin/billiecoind}
+
+# billiecoind opts default to -disablewallet, override with BILLIECOIND_OPTS
+billiecoind_opts=${BILLIECOIND_OPTS--disablewallet}
+
+start() {
+    echo -n $"Starting $prog: "
+    daemon $DAEMONOPTS $billiecoind $billiecoind_opts
+    RETVAL=$?
+    echo
+    [ $RETVAL -eq 0 ] && touch $lockfile
+    return $RETVAL
+}
+
+stop() {
+    echo -n $"Stopping $prog: "
+    killproc $prog
+    RETVAL=$?
+    echo
+    [ $RETVAL -eq 0 ] && rm -f $lockfile
+    return $RETVAL
+}
+
+case "$1" in
+    start)
+        start
+        ;;
+    stop)
+        stop
+        ;;
+    status)
+        status $prog
+        ;;
+    restart)
+        stop
+        start
+        ;;
+    *)
+        echo "Usage: service $prog {start|stop|status|restart}"
+        exit 1
+        ;;
+esac

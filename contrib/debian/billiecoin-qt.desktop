@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Billiecoin
+Comment=Billiecoin P2P Cryptocurrency
+Comment[fr]=Billiecoin, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=Billiecoin, eşten eşe kriptografik sanal para birimi
+Exec=billiecoin-qt %u
+Terminal=false
+Type=Application
+Icon=billiecoin128
+MimeType=x-scheme-handler/billiecoin;
+Categories=Office;Finance;

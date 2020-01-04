@@ -1,0 +1,3 @@
+debian/manpages/billiecoind.1
+debian/manpages/billiecoin.conf.5
+debian/manpages/billiecoin-cli.1

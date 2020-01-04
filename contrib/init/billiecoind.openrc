@@ -1,0 +1,92 @@
+#!/sbin/runscript
+
+# backward compatibility for existing gentoo layout 
+#
+if [ -d "/var/lib/billiecoincore/.billiecoincore" ]; then
+	BILLIECOIND_DEFAULT_DATADIR="/var/lib/billiecoincore/.billiecoincore"
+else
+	BILLIECOIND_DEFAULT_DATADIR="/var/lib/billiecoind"
+fi
+
+BILLIECOIND_CONFIGFILE=${BILLIECOIND_CONFIGFILE:-/etc/billiecoincore/billiecoin.conf}
+BILLIECOIND_PIDDIR=${BILLIECOIND_PIDDIR:-/var/run/billiecoind}
+BILLIECOIND_PIDFILE=${BILLIECOIND_PIDFILE:-${BILLIECOIND_PIDDIR}/billiecoind.pid}
+BILLIECOIND_DATADIR=${BILLIECOIND_DATADIR:-${BILLIECOIND_DEFAULT_DATADIR}}
+BILLIECOIND_USER=${BILLIECOIND_USER:-${BILLIECOIN_USER:-billiecoincore}}
+BILLIECOIND_GROUP=${BILLIECOIND_GROUP:-billiecoincore}
+BILLIECOIND_BIN=${BILLIECOIND_BIN:-/usr/bin/billiecoind}
+BILLIECOIND_NICE=${BILLIECOIND_NICE:-${NICELEVEL:-0}}
+BILLIECOIND_OPTS="${BILLIECOIND_OPTS:-${BILLIECOIN_OPTS}}"
+
+name="Billiecoin Core Daemon"
+description="Billiecoin cryptocurrency P2P network daemon"
+
+command="/usr/bin/billiecoind"
+command_args="-pid=\"${BILLIECOIND_PIDFILE}\" \
+		-conf=\"${BILLIECOIND_CONFIGFILE}\" \
+		-datadir=\"${BILLIECOIND_DATADIR}\" \
+		-daemon \
+		${BILLIECOIND_OPTS}"
+
+required_files="${BILLIECOIND_CONFIGFILE}"
+start_stop_daemon_args="-u ${BILLIECOIND_USER} \
+			-N ${BILLIECOIND_NICE} -w 2000"
+pidfile="${BILLIECOIND_PIDFILE}"
+
+# The retry schedule to use when stopping the daemon. Could be either
+# a timeout in seconds or multiple signal/timeout pairs (like
+# "SIGKILL/180 SIGTERM/300")
+retry="${BILLIECOIND_SIGTERM_TIMEOUT}"
+
+depend() {
+	need localmount net
+}
+
+# verify
+# 1) that the datadir exists and is writable (or create it)
+# 2) that a directory for the pid exists and is writable
+# 3) ownership and permissions on the config file
+start_pre() {
+	checkpath \
+	-d \
+	--mode 0750 \
+	--owner "${BILLIECOIND_USER}:${BILLIECOIND_GROUP}" \
+	"${BILLIECOIND_DATADIR}"
+
+	checkpath \
+	-d \
+	--mode 0755 \
+	--owner "${BILLIECOIND_USER}:${BILLIECOIND_GROUP}" \
+	"${BILLIECOIND_PIDDIR}"
+
+	checkpath -f \
+	-o ${BILLIECOIND_USER}:${BILLIECOIND_GROUP} \
+	-m 0660 \
+	${BILLIECOIND_CONFIGFILE}
+
+	checkconfig || return 1
+}
+
+checkconfig()
+{
+	if ! grep -qs '^rpcpassword=' "${BILLIECOIND_CONFIGFILE}" ; then
+		eerror ""
+		eerror "ERROR: You must set a secure rpcpassword to run billiecoind."
+		eerror "The setting must appear in ${BILLIECOIND_CONFIGFILE}"
+		eerror ""
+		eerror "This password is security critical to securing wallets "
+		eerror "and must not be the same as the rpcuser setting."
+		eerror "You can generate a suitable random password using the following"
+		eerror "command from the shell:"
+		eerror ""
+		eerror "bash -c 'tr -dc a-zA-Z0-9 < /dev/urandom | head -c32 && echo'"
+		eerror ""
+		eerror "It is also recommended that you also set alertnotify so you are "
+		eerror "notified of problems:"
+		eerror ""
+		eerror "ie: alertnotify=echo %%s | mail -s \"Billiecoin Core Alert\"" \
+			"admin@foo.com"
+		eerror ""
+		return 1
+	fi
+}

@@ -1,0 +1,11 @@
+[Protocol]
+exec=billiecoin-qt '%u'
+protocol=billiecoin
+input=none
+output=none
+helper=true
+listing=
+reading=false
+writing=false
+makedir=false
+deleting=false

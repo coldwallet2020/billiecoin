@@ -1,0 +1,33 @@
+# /etc/conf.d/billiecoind: config file for /etc/init.d/billiecoind
+
+# Config file location
+#BILLIECOIND_CONFIGFILE="/etc/billiecoincore/billiecoin.conf"
+
+# What directory to write pidfile to?  (created and owned by $BILLIECOIND_USER)
+#BILLIECOIND_PIDDIR="/var/run/billiecoind"
+
+# What filename to give the pidfile
+#BILLIECOIND_PIDFILE="${BILLIECOIND_PIDDIR}/billiecoind.pid"
+
+# Where to write billiecoind data (be mindful that the blockchain is large)
+#BILLIECOIND_DATADIR="/var/lib/billiecoind"
+
+# User and group to own billiecoind process
+#BILLIECOIND_USER="billiecoincore"
+#BILLIECOIND_GROUP="billiecoincore"
+
+# Path to billiecoind executable
+#BILLIECOIND_BIN="/usr/bin/billiecoind"
+
+# Nice value to run billiecoind under
+#BILLIECOIND_NICE=0
+
+# Additional options (avoid -conf and -datadir, use flags above)
+BILLIECOIND_OPTS="-disablewallet"
+
+# The timeout in seconds OpenRC will wait for billiecoind to terminate
+# after a SIGTERM has been raised.
+# Note that this will be mapped as argument to start-stop-daemon's
+# '--retry' option, which means you can specify a retry schedule
+# here. For more information see man 8 start-stop-daemon.
+BILLIECOIND_SIGTERM_TIMEOUT=60
