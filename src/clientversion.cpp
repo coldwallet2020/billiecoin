@@ -46,8 +46,8 @@ const std::string CLIENT_NAME("Billiecoin Core");
 //! git will put "#define GIT_ARCHIVE 1" on the next line inside archives. 
 #define GIT_ARCHIVE 1
 #ifdef GIT_ARCHIVE
-#define GIT_COMMIT_ID "b857b3d6fa2"
-#define GIT_COMMIT_DATE "Wed, 12 Dec 2018 15:27:56 -0800"
+#define GIT_COMMIT_ID "8fcb6aaad6cf4ce773907b9efec2330574d11dda"
+#define GIT_COMMIT_DATE "Sat Jan 4 06:59:48 2020 +0000"
 #endif
 
 #define BUILD_DESC_WITH_SUFFIX(maj, min, rev, build, suffix) \
