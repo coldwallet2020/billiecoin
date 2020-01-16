@@ -28,12 +28,6 @@ Services include:
 
 - Hybrid layer 2 PoW/PoS consensus with bonded validator system (masternodes)
 - Decentralized governance (blockchain pays for work via proposals and masternode votes)
-- Decentralized identity reservation, ownership, and exchange
-- Digital certificate storage, ownership, and exchange
-- Distributed marketplace and exchange
-- Digital services provider marketplace and platform
-- Digital asset creation and management
-- Decentralized escrow service
 
 For more information, as well as an immediately useable, binary version of
 the Billiecoin client sofware, see https://www.billiecoin.green.
