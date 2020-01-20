@@ -84,7 +84,7 @@ static CBlock CreateDevNetGenesisBlock(const uint256 &prevBlockHash, const std::
 
 static CBlock CreateGenesisBlock(uint32_t nTime, uint32_t nNonce, uint32_t nBits, int32_t nVersion, const CAmount& genesisReward)
 {
-    const char* pszTimestamp = "do not compile";
+    const char* pszTimestamp = "MN 17/Jan/2020 Billie Eilish flew in to London in secret to record the Bond theme tune";
     const CScript genesisOutputScript = CScript() << ParseHex("04747bf3a8d353ba4744795ab06e73b68457b3c490492c0ff6f9660fd4b52b7541ec540bada8231e24777df4c256bd49d46918aca6973872bb4d5456de1de2a130") << OP_CHECKSIG;
     return CreateGenesisBlock(pszTimestamp, genesisOutputScript, nTime, nNonce, nBits, nVersion, genesisReward);
 }
@@ -160,7 +160,7 @@ public:
         consensus.nGovernanceMinQuorum = 10;
         consensus.nGovernanceFilterElements = 20000;
         consensus.nMasternodeMinimumConfirmations = 15;
-        consensus.BIP34Height = 0;
+        consensus.BIP34Height = 100;
         consensus.BIP34Hash = uint256();
         consensus.BIP65Height = 0;
         consensus.BIP66Height = 0;
@@ -196,17 +196,17 @@ public:
 
 
         // The best chain should have at least this much work.
-        consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000000000000000000100110");
+        consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000000000000000000100588");
 
         // By default assume that the signatures in ancestors of this block are valid.
-        consensus.defaultAssumeValid = uint256S("0x0000000000cecf89bb26fe2f2a82369d5cb13cf828ab03a5954ca9e4233999ff");
+        consensus.defaultAssumeValid = uint256S("0x00000000005995ac52a8a301971d66df0c19bf095f7375736555796df44f333e");
 
         /**
          * The message start string is designed to be unlikely to occur in normal data.
          * The characters are rarely used upper ASCII, not valid as UTF-8, and produce
          * a large 32-bit integer with any alignment.
          */
-	pchMessageStart[0] = 0xbf;
+	pchMessageStart[0] = 0xce;
 	pchMessageStart[1] = 0xbd;
 	pchMessageStart[2] = 0x6b;
 	pchMessageStart[3] = 0x0c;
@@ -214,12 +214,12 @@ public:
 	nDefaultPort = 5369;
 	nPruneAfterHeight = 1000000;
 	uint256 hash;
-	genesis = CreateGenesisBlock(1579494135, 1068888, 0x1e0ffff0, 1, 42 * COIN);
-	/*CBlockHeader genesisHeader = genesis.GetBlockHeader();
-	GenerateGenesisBlock(genesisHeader, &hash);*/
+	genesis = CreateGenesisBlock(1579510445, 3084884, 0x1e0ffff0, 1, 42 * COIN);
+		/*CBlockHeader genesisHeader = genesis.GetBlockHeader();
+		GenerateGenesisBlock(genesisHeader, &hash);*/
 
 	consensus.hashGenesisBlock = genesis.GetHash();
-	assert(consensus.hashGenesisBlock == uint256S("0x000003f57cef61d0cd1012b5f7b4af67969f62f72815d4f5d7ce8eb330eb3214"));
+	assert(consensus.hashGenesisBlock == uint256S("0x0000023e337a54117781452fec8d0d7ae6dc5697e728435c928b3a9770efd6ef"));
 	assert(genesis.hashMerkleRoot == uint256S("0x1a78461f5eae7af5109a4e9ec95b85eb91fa2d96cb558f05ce696250fc2de72b"));
 
 	//vSeeds.push_back(CDNSSeedData("seed1.billiecoin.green", "seed1.billiecoin.green"));
@@ -261,15 +261,15 @@ public:
         strSporkAddress = "BN8K2NEAB75kfjvLYLXWXJsV1wDBo83cwP";
 		checkpointData = {
 			{
-				{ 128, uint256S("0x0000000000cecf89bb26fe2f2a82369d5cb13cf828ab03a5954ca9e4233999ff") },
+				{ 700, uint256S("0x00000000005995ac52a8a301971d66df0c19bf095f7375736555796df44f333e") },
 			}
 		};
 
 		chainTxData = ChainTxData{
-			// Data from rpc: getchaintxstats 128
-			/* nTime    */ 1579498859,
-			/* nTxCount */ 142,
-			/* dTxRate  */ 0.09349890430971512
+			// Data from rpc: getchaintxstats 700
+			/* nTime    */ 1579529015,
+			/* nTxCount */ 737,
+			/* dTxRate  */ 0.07538494439692045
 		};
     }
 };
