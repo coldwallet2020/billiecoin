@@ -196,10 +196,10 @@ public:
 
 
         // The best chain should have at least this much work.
-        consensus.nMinimumChainWork = uint256S("0x00");
+        consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000000000000000000100110");
 
         // By default assume that the signatures in ancestors of this block are valid.
-        consensus.defaultAssumeValid = uint256S("0x000003f57cef61d0cd1012b5f7b4af67969f62f72815d4f5d7ce8eb330eb3214");
+        consensus.defaultAssumeValid = uint256S("0x0000000000cecf89bb26fe2f2a82369d5cb13cf828ab03a5954ca9e4233999ff");
 
         /**
          * The message start string is designed to be unlikely to occur in normal data.
@@ -261,15 +261,15 @@ public:
         strSporkAddress = "BN8K2NEAB75kfjvLYLXWXJsV1wDBo83cwP";
 		checkpointData = {
 			{
-				{ 0, uint256S("0x000003f57cef61d0cd1012b5f7b4af67969f62f72815d4f5d7ce8eb330eb3214") },
+				{ 128, uint256S("0x0000000000cecf89bb26fe2f2a82369d5cb13cf828ab03a5954ca9e4233999ff") },
 			}
 		};
 
 		chainTxData = ChainTxData{
 			// Data from rpc: getchaintxstats 4096 92025d074fdd503b0f0f4d4a11dcfbc8a57509d0a196bb400ebdb19556d61b0d
 			/* nTime    */ 0,
-			/* nTxCount */ 0,
-			/* dTxRate  */ 0
+			/* nTxCount */ 142,
+			/* dTxRate  */ 0.09349890430971512
 		};
     }
 };
