@@ -84,7 +84,7 @@ static CBlock CreateDevNetGenesisBlock(const uint256 &prevBlockHash, const std::
 
 static CBlock CreateGenesisBlock(uint32_t nTime, uint32_t nNonce, uint32_t nBits, int32_t nVersion, const CAmount& genesisReward)
 {
-    const char* pszTimestamp = "MN 17/Jan/2020 Billie Eilish flew in to London in secret to record the Bond theme tune";
+    const char* pszTimestamp = "do not compile";
     const CScript genesisOutputScript = CScript() << ParseHex("04747bf3a8d353ba4744795ab06e73b68457b3c490492c0ff6f9660fd4b52b7541ec540bada8231e24777df4c256bd49d46918aca6973872bb4d5456de1de2a130") << OP_CHECKSIG;
     return CreateGenesisBlock(pszTimestamp, genesisOutputScript, nTime, nNonce, nBits, nVersion, genesisReward);
 }
